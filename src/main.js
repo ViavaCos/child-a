@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import './public-path' // 解决路由懒加载问题
 
 Vue.config.productionTip = false
 
@@ -31,5 +32,7 @@ export async function mount(props = {}){
 }
 
 export async function unmount(){
-  instance.destroy()
+  // 内存释放
+  instance.$el.html = ''
+  instance = null
 }

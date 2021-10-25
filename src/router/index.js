@@ -22,7 +22,8 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // 配置qiankun框架下子应用路由前缀(标识)
+  base: window.__POWERED_BY_QIANKUN__ ? '/child-a' : process.env.BASE_URL,
   routes
 })
 
