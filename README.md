@@ -1,5 +1,12 @@
 # child-a
 
+本项目为使用微前端框架qiankun的测试项目
+
+[容器](https://github.com/ViavaCos/demo-qiankun)  
+[主应用](https://github.com/ViavaCos/main)  
+子应用  
+
+
 ## Project setup
 ```
 npm install
@@ -10,15 +17,4 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
