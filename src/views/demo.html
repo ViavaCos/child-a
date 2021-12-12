@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body { color: aquamarine; }
+      body div { color: lawngreen; }
+      a,div,p { color: yellowgreen; }
+    </style>
+
+    <style>
+      span { color: tomato; }
+      span a { color: salmon; }
+    </style>
+    <div id="subapp">
+      <span>subapp</span>
+    </div>
+
+    <script>
+
+      var bodyChildren = document.body.children
+      const allStyleElement = []
+
+      for (let k = 0; k < bodyChildren.length; k++) {
+        // 获取所有的style标签
+        if(bodyChildren[k].nodeName == "STYLE"){
+          allStyleElement.push(bodyChildren[k])
+          // 为所有style标签添加一个前缀 #subapp
+          bodyChildren[k].textContent = rewriteCss(bodyChildren[k], '#subapp')
+        }
+      }
+
+      /**
+       * 
+       * @param {object} styleNode 样式节点
+       * @param {string} prefix 预置前缀
+       * @returns 一个拥有全新内容(添加完前缀)的style节点
+       */
+      function rewriteCss(styleNode, prefix = 'data-qiankun-xxx'){
+        // var textContent = 'body { color: lightgreen; }'
+        // var styleNode = document.createElement('style')
+        // styleNode.textContent = textContent
+        // var subapp = document.getElementById('subapp')
+        // subapp.appendChild(styleNode)
+  
+        var sheet = styleNode.sheet
+        console.log(sheet)
+        var rules = sheet.rules
+        
+        var rewriteCssContent = ''
+        for (let i = 0; i < rules.length; i++) {
+          let item = rules[i]
+          // console.log(10085, item);
+          rewriteCssContent += getRewriteCssContent(item.selectorText, item.cssText, prefix)
+        }
+  
+        console.log(10086, rewriteCssContent)
+        return rewriteCssContent
+      }
+
+      /**
+       * 
+       * @param {string} selector 样式选择器
+       * @param {string} fullContent 完整style样式
+       * @param {string} prefix 预置前缀
+       * @returns 重写后的完整style样式
+       */
+      function getRewriteCssContent(selector, fullContent, prefix) {
+        return ' ' + fullContent.replace(selector, prefix + ' ' + selector)
+      }
+    </script>
+  </body>
+</html>

@@ -2,10 +2,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import './public-path' // 解决路由懒加载问题
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import store from './store'
 
-Vue.use(ElementUI)
+// 基座版 2.15.6
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
+// Vue.use(ElementUI)
+
+// 旧版 2.4.8
+// import install from 'old-ver';
+// Vue.use(install)
+
+// 新版 2.15.6
+// import install from 'new-ver';
+// Vue.use(install)
+
 Vue.config.productionTip = false
 
 let instance;
@@ -13,6 +24,7 @@ let instance;
 const render = function(container){
   instance = new Vue({
     router,
+    store,
     render: h => h(App)
   }).$mount(container)
 }
