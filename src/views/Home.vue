@@ -2,7 +2,10 @@
   <div class="home">
     <!-- <el-button type="success" @click="$router.push('/about')">to about</el-button> -->
     <div id="main">
-      <p>Chid</p>
+      <template v-if="aArr.length">
+      <p v-for="(item, index) in $PStore.getters.getArr" :key="index">{{ item.data }}</p>
+      </template>
+      <p class="child">Chid</p>
     </div>
   </div>
 </template>
@@ -12,8 +15,17 @@ import * as echarts from "echarts";
 import "echarts-gl";
 
 export default {
+  data(){
+    return {
+      aArr: []
+    }
+  },
   mounted() {
     // this.init();
+    if(this.$PStore.getters.getArr) {
+      this.aArr = this.$PStore.getters.getArr
+    }
+    console.log(this.$PStore);
   },
   methods: {
     init() {
@@ -137,9 +149,11 @@ export default {
 #main {
   width: 100%;
   height: 350px;
-  line-height: 350px;
-  font-size: 150px;
   color: #fff;
   background-color: lightgreen;
+}
+.child{
+  line-height: 200px;
+  font-size: 150px;
 }
 </style>
