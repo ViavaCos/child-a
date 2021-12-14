@@ -43,7 +43,8 @@ export async function bootstrap(){
 export async function mount(props = {}){
   const { container, parentStore } = props
   render(container.querySelector('#app') || '#app')
-  console.log(instance, parentStore);
+  console.log(10080, 'Child - Vue', instance);
+  console.log(10081, 'Child - $PStore', parentStore);
   // Vue.prototype.$PStore = parentStore
   Vue.prototype.$PStore = Vue.observable(parentStore)
 }
