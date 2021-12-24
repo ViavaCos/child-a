@@ -4,8 +4,20 @@
     <div id="main">
       <template v-if="aArr.length">
       <p v-for="(item, index) in $PStore.getters.getArr" :key="index">{{ item.data }}</p>
+      <p v-for="(item, index) in objArr" :key="index + '10086'">{{ item.data }}</p>
+      <br>
+      <template v-if="$PStore">
+        <!-- <p v-for="(item, index) in $PStore.getters.getStrArr" :key="index + 'a'">{{ item }}</p> -->
+        <p v-for="(item, index) in $PStore.state.strArr" :key="index + 'a'">{{ item }}</p>
+      </template>
+      <br>
+      <template v-if="$PStore">
+        <!-- <p>{{ $PStore.getters.getStr }}, {{ $PStore.state.str }}</p> -->
+        <p>{{ simpleText }}</p>
+      </template>
       </template>
       <p class="child">Chid</p>
+      <button @click="log">log</button>
     </div>
   </div>
 </template>
@@ -20,9 +32,20 @@ export default {
       aArr: []
     }
   },
+  computed:{
+    simpleText: vm => {
+      // return vm.$PStore ? vm.$PStore.getters.getStr : 10086
+      return vm.$PStore ? vm.$PStore.state.str : 10086
+    },
+    objArr: vm => {
+      let res = vm.$PStore.state.arr.filter(item => item !== 0)
+      console.log(10086, res);
+      return res
+    }
+  },
   mounted() {
     // this.init();
-    if(this.$PStore.getters.getArr) {
+    if(this.$PStore) {
       this.aArr = this.$PStore.getters.getArr
     }
     console.log(this.$PStore);
@@ -141,6 +164,9 @@ export default {
 
       option && myChart.setOption(option);
     },
+    log(){
+      console.log(this.$PStore.getters.getArr);
+    }
   },
 };
 </script>
@@ -149,8 +175,8 @@ export default {
 #main {
   width: 100%;
   height: 350px;
-  color: #fff;
-  background-color: lightgreen;
+  color: #ccc;
+  /* background-color: lightgreen; */
 }
 .child{
   line-height: 200px;
