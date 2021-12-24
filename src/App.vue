@@ -4,9 +4,20 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <button @click="test">Get_A</button>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    test(){
+      console.log(this.$test, window.Vue.prototype.$test);
+    }
+  }
+}
+</script>
 
 <style>
 #app {
