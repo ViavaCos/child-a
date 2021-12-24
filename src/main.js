@@ -20,7 +20,7 @@ import store from './store'
 Vue.config.productionTip = false
 
 let instance;
-window.Vue.prototype.$test = { name: 'CHild_A' }
+Vue.prototype.$test = { name: 'CHild_A' }
 
 
 const render = function(container){
